@@ -20,13 +20,18 @@ function makeGrid() {
     for (let t = 0; t < height.value; t++) {
         const tableRaw = table.insertRow(0);
         for (let f = 0; f < width.value; f++) {
-            tableRaw.insertCell(0);
+            let pixelCell = tableRaw.insertCell(0);
+            pixelCell.addEventListener('click', cellColor)
         }
     }
 }
 
-table.addEventListener('click', function (evt) {
-    if (evt.target.nodeName === 'TD') {
-        evt.target.style.backgroundColor = colorPicker.value;
+function cellColor(e) {
+    let cell = e.target.style.backgroundColor
+    if (cell === '') {
+        e.target.style.backgroundColor = colorPicker.value;
+    } else {
+        e.target.style.backgroundColor = '';
     }
-})
+
+}
